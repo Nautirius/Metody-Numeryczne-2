@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Ustawienia podstawowe
+# Warunki początkowe
 lambda_v = -1
 y_0 = 1
 delta_t_arr = [0.01, 0.1, 1.0]
