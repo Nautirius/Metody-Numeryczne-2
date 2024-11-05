@@ -123,8 +123,8 @@ def implicit_rk2(u0, t_max, dt, TOL, max_iter):
 def plot_results(t_arr, u_arr, title, file_name):
     z_arr = N - u_arr
     plt.figure(figsize=(8, 6))
-    plt.plot(t_arr, u_arr, label="u(t) - zarażeni", color='blue')
-    plt.plot(t_arr, z_arr, label="z(t) - zdrowi", color='orange')
+    plt.plot(t_arr, u_arr, label="u(t) - zarażeni", color='red')
+    plt.plot(t_arr, z_arr, label="z(t) - zdrowi", color='blue')
     plt.title(title)
     plt.xlabel("t")
     plt.ylabel("Liczba osób")
