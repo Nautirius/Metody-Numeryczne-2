@@ -20,10 +20,10 @@ def f(u):
 
 # 1. Metoda trapezów
 # Metoda trapezów z iteracją Picarda
-def trapezoidal_picard(u0, t_max, dt, TOL, max_iter):
+def picard(u_0, t_max, dt, TOL, max_iter):
     t_arr = np.arange(0, t_max + dt, dt)
     u_arr = np.zeros_like(t_arr)
-    u_arr[0] = u0
+    u_arr[0] = u_0
 
     for n in range(len(t_arr) - 1):
         u_prev = u_arr[n]
@@ -32,6 +32,7 @@ def trapezoidal_picard(u0, t_max, dt, TOL, max_iter):
             u_new = u_prev + dt / 2 * (f(u_prev) + f(u_next))
             if abs(u_new - u_next) < TOL:
                 u_next = u_new
+                print(_)
                 break
             u_next = u_new
         u_arr[n + 1] = u_next
@@ -40,10 +41,10 @@ def trapezoidal_picard(u0, t_max, dt, TOL, max_iter):
 
 
 # Metoda trapezów z iteracją Newtona
-def trapezoidal_newton(u0, t_max, dt, TOL, max_iter):
+def newton(u_0, t_max, dt, TOL, max_iter):
     t_arr = np.arange(0, t_max + dt, dt)
     u_arr = np.zeros_like(t_arr)
-    u_arr[0] = u0
+    u_arr[0] = u_0
 
     for n in range(len(t_arr) - 1):
         u_prev = u_arr[n]
@@ -74,10 +75,10 @@ b2 = 0.5
 
 
 # Metoda RK2
-def implicit_rk2(u0, t_max, dt, TOL, max_iter):
+def implicit_rk2(u_0, t_max, dt, TOL, max_iter):
     t_arr = np.arange(0, t_max + dt, dt)
     u_arr = np.zeros_like(t_arr)
-    u_arr[0] = u0
+    u_arr[0] = u_0
 
     for n in range(len(t_arr) - 1):
         u_prev = u_arr[n]
@@ -90,7 +91,7 @@ def implicit_rk2(u0, t_max, dt, TOL, max_iter):
             F1 = U1 - u_prev - dt * (a11 * f(U1) + a12 * f(U2))
             F2 = U2 - u_prev - dt * (a21 * f(U1) + a22 * f(U2))
 
-            # Wyliczenie elementów macierzy Jacobiego
+            # Wyliczenie elementów macierzy m
             m11 = 1 - dt * a11 * (alpha - 2 * beta * U1)
             m12 = -dt * a12 * (alpha - 2 * beta * U2)
             m21 = -dt * a21 * (alpha - 2 * beta * U1)
@@ -138,13 +139,13 @@ def plot_results(t_arr, u_arr, title, file_name):
 if __name__ == "__main__":
     # Zadanie 1
     # Obliczenia metodą Picarda
-    t_arr, u_arr_picard = trapezoidal_picard(u_0, t_max, dt, TOL, max_iter)
+    t_arr, u_arr_picard = picard(u_0, t_max, dt, TOL, max_iter)
     z_arr_picard = N - u_arr_picard
 
     plot_results(t_arr, u_arr_picard, "Metoda trapezów z iteracją Picarda", "trapezoidal_picard.png")
 
     # Obliczenia metodą Newtona
-    _, u_arr_newton = trapezoidal_newton(u_0, t_max, dt, TOL, max_iter)
+    _, u_arr_newton = newton(u_0, t_max, dt, TOL, max_iter)
     z_arr_newton = N - u_arr_newton
 
     plot_results(t_arr, u_arr_newton, "Metoda trapezów z iteracją Newtona", "trapezoidal_newton.png")
