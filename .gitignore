@@ -1,2 +1,5 @@
 .idea/
 *.tar.gz
+*.txt
+*.out
+lab04/results_old/
